@@ -1,22 +1,31 @@
 {
-    "name": "src/chat-gpt-for-php",
-    "description": "Esto es un c\u0000digo que conecta la API de OpenAI con php7.4",
-    "type": "library",
-    "require": {
-        "guzzlehttp/guzzle": "^7.7",
-        "php": ">=7.4"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Gean pearre",
-            "email": "geanpearre94@gmail.com"
-        }
-    ],
-    "autoload": {
+  "name": "src/chat-gpt-for-php",
+  "description": "Esto es un c\u0000digo que conecta la API de OpenAI con php7.4",
+  "homepage": "https://github.com/Wallet4Sales/ChatGPT-For-PHP",
+  "keywords": [
+    "PHP",
+    "ChatGPT"
+  ],
+  "type": "library",
+  "require": {
+    "guzzlehttp/guzzle": "^7.7",
+    "php": ">=7.4"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gean pearre",
+      "email": "geanpearre94@gmail.com"
+    }
+  ],
+  "autoload": {
     "psr-4": {
-          "ChatGPTPHP\\": "src/"
-        }
-    },
-    "minimum-stability": "stable"
+      "ChatGPTPHP\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "v1.x-dev"
+    }
+  }
 }
