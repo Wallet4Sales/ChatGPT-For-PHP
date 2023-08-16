@@ -9,8 +9,7 @@
   "type": "library",
   "require": {
     "guzzlehttp/guzzle": "^7.7",
-    "php": ">=7.4",
-    "chatgpt-php/chat-gpt-for-php": "v1.0.0"
+    "php": ">=7.4"
   },
   "license": "MIT",
   "authors": [
@@ -23,7 +22,5 @@
     "psr-4": {
       "ChatGPTPHP\\": "src/"
     }
-  },
-  "minimum-stability" : "stable",
-  "prefer-stable": true
+  }
 }
