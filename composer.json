@@ -22,7 +22,5 @@
     "psr-4": {
       "ChatGPTPHP\\": "src/"
     }
-  },
-  "minimum-stability" : "stable",
-  "prefer-stable": true
+  }
 }
