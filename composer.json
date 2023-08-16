@@ -22,10 +22,5 @@
     "psr-4": {
       "ChatGPTPHP\\": "src/"
     }
-  },
-  "extra": {
-     "branch-alias": {
-       "dev-master": "v1.x-dev"
-      }
-   }
+  }
 }
