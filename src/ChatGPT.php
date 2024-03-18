@@ -58,6 +58,28 @@ class ChatGPT
 
 	/**
 	 * Description:
+	 * get model chat
+	 *
+	 * @return string
+	 */
+	public function getModel()
+	{
+		return $this->model;
+	}
+
+	/**
+	 * Description:
+	 * set model chat
+	 *
+	 * @return void
+	 */
+	public function setModel($model)
+	{
+		$this->model = $model;
+	}
+
+	/**
+	 * Description:
 	 * Adds a message to the conversation.
 	 * @param  string  $message
 	 * @param  string  $role
