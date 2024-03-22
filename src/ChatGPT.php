@@ -62,6 +62,7 @@ class ChatGPT
 	 *
 	 * @return string
 	 */
+
 	public function getModel()
 	{
 		return $this->model;
@@ -73,9 +74,34 @@ class ChatGPT
 	 *
 	 * @return void
 	 */
+
 	public function setModel($model)
 	{
 		$this->model = $model;
+	}
+
+	/**
+	 * Description:
+	 * get temperature chat
+	 *
+	 * @return string
+	 */
+
+	public function getTemperature()
+	{
+		return $this->temperature;
+	}
+
+	/**
+	 * Description:
+	 * set temperature chat
+	 *
+	 * @return void
+	 */
+
+	public function setTemperature($temperature)
+	{
+		$this->temperature = $temperature;
 	}
 
 	/**
@@ -257,5 +283,10 @@ class ChatGPT
 
 		$data = json_decode($response->getBody()->getContents(), true);
 		return $data;
+	}
+
+	public function cleanMessages(): void
+	{
+		$this->messages = [];
 	}
 }
