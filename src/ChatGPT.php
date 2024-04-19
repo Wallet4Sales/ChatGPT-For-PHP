@@ -27,6 +27,8 @@ class ChatGPT
 
 	private $http;
 
+	private $tools = [];
+
 	public function __construct(
 		string $key,
 		string $baseUrl = null,
@@ -105,6 +107,40 @@ class ChatGPT
 	}
 
 	/**
+	 * Description: 
+	 * get tools functions
+	 *
+	 * @return array
+	 */
+	public function getTools()
+	{
+		return $this->tools;
+	}
+
+	/**
+	 * Description: 
+	 * set tools functions
+	 * @param  array  $tools
+	 *
+	 * @return mixed
+	 */
+	public function setTools(array $tools)
+	{
+		$this->tools = $tools;
+	}
+
+	/**
+	 * Description:
+	 * Get a message to the conversation.
+	 *
+	 * @return array
+	 */
+	public function getMessages()
+	{
+		return $this->messages;
+	}
+
+	/**
 	 * Description:
 	 * Adds a message to the conversation.
 	 * @param  string  $message
@@ -138,6 +174,7 @@ class ChatGPT
 		$data = [
 			'model' => $this->model,
 			'messages' => $this->messages,
+			'tools' => $this->tools,
 			'stream' => $stream,
 			'temperature' => $this->temperature,
 			'top_p' => $this->topP,
@@ -191,13 +228,19 @@ class ChatGPT
 				throw new Exception('Response is not json');
 			}
 
+			// var_dump($data);
+			// exit;
+
 			if (! $this->checkFields($data)) {
 				throw new Exception('Field missing');
 			}
 
-			$answer = $data['choices'][0]['message']['content'];
-			$this->addMessage($answer, 'assistant');
+			$answer = isset($data['choices'][0]['message']['content']) ? $data['choices'][0]['message']['content'] : $data['choices'][0]['message']['tool_calls'];
 
+			if (!is_array($answer)) {
+				$this->addMessage($answer, 'assistant');
+			}
+			
 			yield [
 				'answer' => $answer,
 				'id' => $data['id'],
@@ -216,7 +259,8 @@ class ChatGPT
 	 */
 	public function checkFields($line): bool
 	{
-		return isset($line['choices'][0]['message']['content']) && isset($line['id']) && isset($line['usage']);
+		// return isset($line['id']) && isset($line['usage']);
+		return ( isset($line['choices'][0]['message']['content']) || isset($line['choices'][0]['message']['tool_calls'])) && isset($line['id']) && isset($line['usage']);
 	}
 
 	/**
