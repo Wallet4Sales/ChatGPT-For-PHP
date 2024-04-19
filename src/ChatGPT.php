@@ -174,13 +174,16 @@ class ChatGPT
 		$data = [
 			'model' => $this->model,
 			'messages' => $this->messages,
-			'tools' => $this->tools,
 			'stream' => $stream,
 			'temperature' => $this->temperature,
 			'top_p' => $this->topP,
 			'n' => 1,
 			'user' => $user ?? 'chatgpt-php',
 		];
+
+		if (count($this->tools) > 0) {
+			$data [] = $this->tools;
+		}
 
 		try {
 			$response = $this->http->post(
@@ -237,12 +240,15 @@ class ChatGPT
 
 			$answer = isset($data['choices'][0]['message']['content']) ? $data['choices'][0]['message']['content'] : $data['choices'][0]['message']['tool_calls'];
 
+			$type = 'function';
 			if (!is_array($answer)) {
 				$this->addMessage($answer, 'assistant');
+				$type = 'text';
 			}
 			
 			yield [
 				'answer' => $answer,
+				'type' => $type,
 				'id' => $data['id'],
 				'model' => $this->model,
 				'usage' => $data['usage'],
